@@ -20,8 +20,12 @@ Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
 Get-NetIPAddress
 ```
 
-# Joining the workstation to the domain
+### Joining the workstation to the domain
 
 ```powershell
 Add-Computer -Domainname xyz.com -Credential xyz\Administrator -Force -Restart
 ```
+
+## 02 - Populate DC
+1. Create `ad_schema.json` file representing the schema we want for groups and users
+2. Create powershell script for parsing the json file and create the respective users and groups
