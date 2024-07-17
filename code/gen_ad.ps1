@@ -1,13 +1,15 @@
 param( [Parameter(Mandatory=$true)] $JSONFile)
 
-function CreateADGroup(){
+function CreateADGroup()
+{
     param( [Parameter(Mandatory=$true)] $groupObject )
 
     $name = $groupObject.name
 
     New-ADGroup -name $name -GroupScope Global
 }
-function CreateADUser() {
+function CreateADUser() 
+{
     param ( [Parameter(Mandatory=$true)] $userObject)
     # Pull the name from the JSON object
     $name = $userObject.name
@@ -44,10 +46,12 @@ $json = ( Get-Content $JSONFile | ConvertFrom-JSON)
 
 $Global:Domain = $json.domain
 
-foreach ( $group in $json.groups){
+foreach ( $group in $json.groups)
+{
     CreateADGroup $group
 }
 
-foreach ( $user in $json.users){
+foreach ( $user in $json.users)
+{
     CreateADUser $user
 }
